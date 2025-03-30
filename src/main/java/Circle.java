@@ -17,7 +17,8 @@ public class Circle
      */
     public Circle()
     {
-        //TODO: replace this line with your code
+        radius = 1.0;
+        location = new Point();
     }
 
     /**
@@ -28,7 +29,8 @@ public class Circle
      */
     public Circle(double radius)
     {
-        //TODO: replace this line with your code
+        this.radius = radius;
+        this.location = new Point(); // Initialize location to (0,0)
     }
 
     /**
@@ -41,6 +43,8 @@ public class Circle
     public Circle(Point location, double radius)
     {
         //TODO: replace this line with your code
+        this.location = new Point(location); // Use copy constructor
+        this.radius = radius;
     }
 
     //accessors
@@ -51,8 +55,7 @@ public class Circle
      */
     public double getRadius()
     {
-        //TODO: replace this line and the line below with your code
-        return 0.0;
+        return radius;
     }
 
     /**
@@ -63,7 +66,8 @@ public class Circle
     public Point getLocation()
     {
         //TODO: replace this line and the line below with your code
-        return null;
+        return new Point(location);//use copy constructor
+        //return null;
     }
 
     // mutator methods
@@ -74,7 +78,7 @@ public class Circle
      */
     public void setRadius(double radius)
     {
-        //TODO: replace this line with your code
+        this.radius = radius;
     }
 
     /**
@@ -85,6 +89,7 @@ public class Circle
     public void setLocation(Point location)
     {
         //TODO: replace this line with your code
+        this.location = new Point(location); // Use copy constructor
     }
 
     // other methods
@@ -97,6 +102,11 @@ public class Circle
     public boolean contains(Point p)
     {
         //TODO: replace this line and the line below with your code
+        double distanceSquared = Math.pow(p.getX() - location.getX(), 2) +
+                Math.pow(p.getY() - location.getY(), 2);
+        if (distanceSquared <= Math.pow(radius, 2)) {
+            return true;
+        }
         return false;
     }
 
@@ -109,6 +119,12 @@ public class Circle
     public boolean intersects(Circle aCircle)
     {
         //TODO: replace this line and the line below with your code
+        double centerDistance = Math.sqrt(
+                Math.pow(this.location.getX() - aCircle.location.getX(), 2) +
+                        Math.pow(this.location.getY() - aCircle.location.getY(), 2));
+        if (centerDistance <= (this.radius + aCircle.radius)) {
+            return true;
+        }
         return false;
     }
 
